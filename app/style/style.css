@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 * {
     margin: 0px;
     padding: 0px;
 }
 
 :root {
+    --font: 'Roboto', sans-serif;
     --cor1: #7476FF;
     --cor2: #7476FF;
     --cor3: #5D5DCD;
@@ -14,7 +17,7 @@
 }
 
 html, body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font);
 }
 
 body {
@@ -37,7 +40,7 @@ main > section {
     position: relative;
 }
 
-section > div#teste {
+section > div {
     background-color: var(--cor7);
     position: relative;
     left: 50%;
@@ -48,7 +51,7 @@ section > div#teste {
     border-radius: 6px;
 }
 
-div#teste > span {
+div > span {
     display: block;
     position: relative;
     left: 50%;
@@ -77,6 +80,7 @@ td {
 
 .operation {
     background-color: var(--cor1);
+    font-size: 1.3em;
 }
 
 #ac {

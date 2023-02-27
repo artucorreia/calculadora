@@ -15,31 +15,44 @@ function main(event) {
             calculation = solve(calculation);
             display.innerHTML = solve(calculation);
             displayingResult = true;
-            break;
+        break;
         
         case 'ac':
             display.innerHTML = ``;
             calculation = '';
-            break;
+        break;
         
         case 'backspace': 
             calculation = backspace(display.innerHTML);
             display.innerHTML = backspace(display.innerHTML);
-            break;
+        break;
         
         case '/': 
         case '*':
         case '+':
         case '-':
-            if (!displayingResult) {
-                clearDisplayer(display);
-                calculation += element;
-            }
-            break;
-            
+            clearDisplayer(display);
+            calculation += element;
+            displayingResult = false;
+        break;
+
         case 'table':
-            break;
         
+        break;
+        
+        case '.': 
+            if (display.innerHTML === '') {
+                display.innerHTML = '0.'
+                calculation = '0.';
+            } else if (display.innerHTML.includes('.')) {
+
+            } else {
+                calculation += element;
+                display.innerHTML += `${element}`;
+            }
+            displayingResult = false;
+        break;
+
         default:
             if (displayingResult) {
                 display.innerHTML = '';
@@ -48,6 +61,7 @@ function main(event) {
             calculation += element;
             display.innerHTML += `${element}`;
             displayingResult = false;
-            break;
+        break;
     }
+    console.log(calculation);
 };
