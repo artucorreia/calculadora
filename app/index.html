@@ -9,31 +9,35 @@
 </head>
 <body>
     <main>
-        <section id="tela">29 + 32 - 2</section>
-        <table class="calculator" id="eew">
+        <section>
+            <div id="teste">
+                <span id="displayer"> </span>
+            </div>
+        </section>
+        <table class="calculator" id="table" onclick="main(event)">
             <tbody>
                 <tr>
                     <td id="ac" colspan="2">AC</td>
                     <td>x</td>
-                    <td class="operation">&divide;</td>
+                    <td class="operation" id="/">&divide;</td>
                 </tr>
                 <tr>
                     <td id="7">7</td>
                     <td id="8">8</td>
                     <td id="9">9</td>
-                    <td class="operation">&times;</td>
+                    <td class="operation" id="*">&times;</td>
                 </tr>
                 <tr>
                     <td id="4">4</td>
                     <td id="5">5</td>
                     <td id="6">6</td>
-                    <td class="operation">-</td>
+                    <td class="operation" id="-">-</td>
                 </tr>
                 <tr>
                     <td id="1">1</td>
                     <td id="2">2</td>
                     <td id="3">3</td>
-                    <td class="operation">+</td>
+                    <td class="operation" id="+">+</td>
                 </tr>
                 <tr>
                     <td id="0">0</td>
@@ -43,5 +47,6 @@
             </tbody>
         </table>
     </main>
+    <script src="js/script.js"></script>
 </body>
 </html>
