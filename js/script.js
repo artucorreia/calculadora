@@ -12,9 +12,11 @@ function main(event) {
 
     switch (element) {
         case 'equal':
-            calculation = solve(calculation);
-            display.innerHTML = solve(calculation);
-            displayingResult = true;
+            if(solve(calculation)) {
+                calculation = solve(calculation);
+                display.innerHTML = solve(calculation);
+                displayingResult = true;
+            }
         break;
         
         case 'ac':
@@ -42,8 +44,8 @@ function main(event) {
         
         case '.': 
             if (display.innerHTML === '') {
-                display.innerHTML = '0.'
-                calculation = '0.';
+                display.innerHTML += '0.'
+                calculation += '0.';
             } else if (display.innerHTML.includes('.')) {
 
             } else {
@@ -63,4 +65,5 @@ function main(event) {
             displayingResult = false;
         break;
     }
+    console.log(calculation);
 };
