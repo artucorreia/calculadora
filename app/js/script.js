@@ -63,5 +63,4 @@ function main(event) {
             displayingResult = false;
         break;
     }
-    console.log(calculation);
 };
