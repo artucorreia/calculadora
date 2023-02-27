@@ -25,6 +25,7 @@ function main(event) {
         break;
         
         case 'backspace': 
+        case 'icon-bs':
             calculation = backspace(display.innerHTML);
             display.innerHTML = backspace(display.innerHTML);
         break;
