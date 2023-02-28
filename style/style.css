@@ -33,7 +33,6 @@ main > section {
     background-color: var(--cor6);
     color: white;
     text-align: right;
-    font-size: 1.8em;
     height: 80px;
     width: 350px;
     border-radius: 7px 7px 0px 0px;
@@ -51,12 +50,13 @@ section > div {
     border-radius: 6px;
 }
 
-div > span {
+div > span#displayer {
     display: block;
     position: relative;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    font-size: 2.8em;
     margin-right: 30px;
 }
 

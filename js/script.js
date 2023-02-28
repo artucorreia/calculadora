@@ -1,32 +1,53 @@
-function backspace(display) { return display.slice(0, display.length - 1); };
+const backspace = string => string.slice(0, string.length - 1);
 
-function clearDisplayer(display) { display.innerHTML = ``; };
+const limiteDeCaracteres = string => string.length < 30 ? true : false;
 
-function solve(calculation) { return eval(calculation); };
+const changeSize = (display ,value, measure) => display.style.fontSize = value + measure;
+
+function checkCharacters(display) {
+    let characters = display.innerText.length;
+    console.log(display.innerHTML)
+    if (characters > 30) {
+        limiteDeCaracteres(display);
+    } else if (characters > 23) {
+        changeSize(display ,'1.1', 'em');
+    } else if (characters > 18) {
+        changeSize(display, '1.4', 'em');
+    } else if (characters > 15) {
+        changeSize(display, '1.8', 'em');
+    } else if (characters > 11) {
+        changeSize(display, '2.2', 'em');
+    } else {
+        changeSize(display, '2.8', 'em');
+    }
+};
+
+const solve = calculation => eval(calculation);
 
 let calculation = '';
 let displayingResult = false;
 function main(event) {
     let element = event.target.id;
     let display = window.document.getElementById('displayer');
+    let taok = false;
 
     switch (element) {
         case 'equal':
             if(solve(calculation)) {
                 calculation = solve(calculation);
-                display.innerHTML = solve(calculation);
+                display.innerHTML = '= ' + solve(calculation);
                 displayingResult = true;
             }
         break;
         
         case 'ac':
-            display.innerHTML = ``;
+            display.innerHTML = '';
             calculation = '';
         break;
         
         case 'backspace': 
         case 'icon-bs':
-            calculation = backspace(display.innerHTML);
+            calculation = backspace(calculation);
             display.innerHTML = backspace(display.innerHTML);
         break;
         
@@ -34,9 +55,15 @@ function main(event) {
         case '*':
         case '+':
         case '-':
-            clearDisplayer(display);
-            calculation += element;
-            displayingResult = false;
+            if (displayingResult) {
+                display.innerHTML = display.innerHTML.slice(2);
+            }
+            taok = limiteDeCaracteres(display.innerHTML);
+            if (taok) {
+                calculation += element;
+                display.innerHTML += event.target.innerHTML;
+                displayingResult = false;
+            }
         break;
 
         case 'table':
@@ -44,27 +71,33 @@ function main(event) {
         break;
         
         case '.': 
-            if (display.innerHTML === '') {
-                display.innerHTML += '0.'
-                calculation += '0.';
-            } else if (display.innerHTML.includes('.')) {
-
-            } else {
-                calculation += element;
-                display.innerHTML += `${element}`;
+            taok = limiteDeCaracteres(display.innerHTML);
+            if (taok) {
+                if (display.innerHTML === '') {
+                    display.innerHTML += '0.'
+                    calculation += '0.';
+                } else if (display.innerHTML.includes('.')) {
+                    // não deve ter outro '.'
+                } else {
+                    calculation += element;
+                    display.innerHTML += `${element}`;
+                }
+                displayingResult = false;
             }
-            displayingResult = false;
         break;
 
         default:
-            if (displayingResult) {
-                display.innerHTML = '';
-                calculation = '';
+            taok = limiteDeCaracteres(display.innerHTML);
+            if (taok) {
+                if (displayingResult) {
+                    display.innerHTML = '';
+                    calculation = '';
+                }
+                calculation += element;
+                display.innerHTML += `${element}`;
+                displayingResult = false;
             }
-            calculation += element;
-            display.innerHTML += `${element}`;
-            displayingResult = false;
         break;
     }
-    console.log(calculation);
+    checkCharacters(display);
 };
