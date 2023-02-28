@@ -1,6 +1,6 @@
 const backspace = string => string.slice(0, string.length - 1);
 
-const limiteDeCaracteres = string => string.length < 30 ? true : false;
+const charactersLimit = string => string.length < 30 ? true : false;
 
 const changeSize = (display ,value, measure) => display.style.fontSize = value + measure;
 
@@ -8,7 +8,7 @@ function checkCharacters(display) {
     let characters = display.innerText.length;
     console.log(display.innerHTML)
     if (characters > 30) {
-        limiteDeCaracteres(display);
+        charactersLimit(display);
     } else if (characters > 23) {
         changeSize(display ,'1.1', 'em');
     } else if (characters > 18) {
@@ -58,8 +58,7 @@ function main(event) {
             if (displayingResult) {
                 display.innerHTML = display.innerHTML.slice(2);
             }
-            taok = limiteDeCaracteres(display.innerHTML);
-            if (taok) {
+            if ( charactersLimit(display.innerHTML) ) {
                 calculation += element;
                 display.innerHTML += event.target.innerHTML;
                 displayingResult = false;
@@ -71,8 +70,7 @@ function main(event) {
         break;
         
         case '.': 
-            taok = limiteDeCaracteres(display.innerHTML);
-            if (taok) {
+            if ( charactersLimit(display.innerHTML) ) {
                 if (display.innerHTML === '') {
                     display.innerHTML += '0.'
                     calculation += '0.';
@@ -87,8 +85,7 @@ function main(event) {
         break;
 
         default:
-            taok = limiteDeCaracteres(display.innerHTML);
-            if (taok) {
+            if ( charactersLimit(display.innerHTML) ) {
                 if (displayingResult) {
                     display.innerHTML = '';
                     calculation = '';
