@@ -6,10 +6,7 @@ const changeSize = (display ,value, measure) => display.style.fontSize = value +
 
 function checkCharacters(display) {
     let characters = display.innerText.length;
-    console.log(display.innerHTML)
-    if (characters > 30) {
-        charactersLimit(display);
-    } else if (characters > 23) {
+    if (characters > 23) {
         changeSize(display ,'1.1', 'em');
     } else if (characters > 18) {
         changeSize(display, '1.4', 'em');
@@ -24,15 +21,30 @@ function checkCharacters(display) {
 
 const solve = calculation => eval(calculation);
 
+// verifica se o ultimo carater é uma operação
+// se sim, retorna true;
+function checkPreviousCharacter(string) {
+    let symbols = ['*', '/', '+', '-'];
+    let result = false; 
+    for(let symbol of symbols) {
+        if (symbol === string.slice(string.length - 1)) {
+            result = true;
+        }
+    }
+    return result;
+}
+
 let calculation = '';
 let displayingResult = false;
 function main(event) {
     let element = event.target.id;
     let display = window.document.getElementById('displayer');
-    let taok = false;
 
     switch (element) {
         case 'equal':
+            if (checkPreviousCharacter(calculation)) {
+                calculation = backspace(calculation);
+            }
             if(solve(calculation)) {
                 calculation = solve(calculation);
                 display.innerHTML = '= ' + solve(calculation);
@@ -58,7 +70,8 @@ function main(event) {
             if (displayingResult) {
                 display.innerHTML = display.innerHTML.slice(2);
             }
-            if ( charactersLimit(display.innerHTML) ) {
+            let previousIsSymbol = checkPreviousCharacter(String(calculation))
+            if ( charactersLimit(display.innerHTML) && !previousIsSymbol) {
                 calculation += element;
                 display.innerHTML += event.target.innerHTML;
                 displayingResult = false;
