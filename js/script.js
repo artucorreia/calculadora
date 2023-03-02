@@ -19,6 +19,12 @@ function checkCharacters(display) {
     }
 };
 
+function newCalculation(displayingResult, display) {
+    if (displayingResult) {
+        return display.innerHTML = display.innerHTML.slice(2);
+    }
+}
+
 const solve = calculation => eval(calculation);
 
 // verifica se o ultimo carater é uma operação
@@ -67,9 +73,7 @@ function main(event) {
         case '*':
         case '+':
         case '-':
-            if (displayingResult) {
-                display.innerHTML = display.innerHTML.slice(2);
-            }
+            newCalculation(displayingResult, display);
             let previousIsSymbol = checkPreviousCharacter(String(calculation))
             if ( charactersLimit(display.innerHTML) && !previousIsSymbol) {
                 calculation += element;
@@ -83,6 +87,7 @@ function main(event) {
         break;
         
         case '.': 
+            newCalculation(displayingResult, display);
             if ( charactersLimit(display.innerHTML) ) {
                 if (display.innerHTML === '') {
                     display.innerHTML += '0.'
